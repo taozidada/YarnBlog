@@ -252,7 +252,9 @@
 </ul>
 <p>我的项目集成了cocoapods和2个Project，其中一个Project用了Git的submodule。</p>
 <h1 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h1><p>Jenkins下载安装，完成后打开Jenkins的界面，下载一些插件，新建一个空的任务。接下来开始配置，配置我是分三步：1、下载源码 2、配置证书和打包选项 3、上传ipa。</p>
-<h2 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h2><p>源码我使用的是Git，代码放在gitee，其实放哪都是类似的。设置Repository URL和SSH，如果配置错误的话，界面会一直报错。Submodule的配置，需要勾选上<br><figure class="highlight plain"><figcaption><span>Behaviours```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">![Submodule](Jenkins-iOS持续集成细节记录/yuanma1.png)</span><br><span class="line">cocoapods的话需要在构建中加入shell</span><br><span class="line"></span><br><span class="line">```highlight </span><br><span class="line"> export LC_ALL=en_US.UTF-8</span><br><span class="line">/usr/local/bin/pod install --verbose --no-repo-update</span><br></pre></td></tr></table></figure></p>
+<h2 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h2><p>源码我使用的是Git，代码放在gitee，其实放哪都是类似的。设置Repository URL和SSH，如果配置错误的话，界面会一直报错。Submodule的配置，需要勾选上<br><code>Additional Behaviours</code><br><img src="/2019/04/24/Jenkins-iOS持续集成细节记录/yuanma1.png" alt="Submodule"><br>其中第二项的意思是submodule的验证跟主项目一致，我的项目是一致的，可以勾上，若不是的话，需要在想办法，这里没有在深入研究。</p>
+<p>cocoapods的话需要在构建中加入shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> export LC_ALL=en_US.UTF-8</span><br><span class="line">/usr/local/bin/pod install --verbose --no-repo-update</span><br></pre></td></tr></table></figure>
 <p>可以先尝试一下构建，如果成功。建议去<code>工作空间</code>，找到项目所在的目录,把整个项目复制出来，自己先编译一下，是否能编译过。</p>
 <p>注意：</p>
 <ul>
